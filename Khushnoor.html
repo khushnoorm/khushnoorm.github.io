@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Khushnoor - Mathematics, Science, Social Science and competitive exam learning platform.">
+<title>Khushnoor | Learn. Understand. Grow.</title>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--text:#172033;--muted:#64748b;--primary:#315efb;--secondary:#7c3aed;--line:#e6eaf2;--dark:#111827}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:28px;font-weight:800;letter-spacing:-1px;color:var(--dark)}
+.logo span{color:var(--primary)}
+nav{display:flex;gap:22px;align-items:center}
+nav a{font-weight:600;color:#475569;font-size:14px}
+nav a:hover{color:var(--primary)}
+.menu{display:none;border:0;background:none;font-size:27px}
+.hero{padding:85px 0 70px;background:linear-gradient(135deg,#eef3ff 0%,#faf7ff 55%,#fff 100%)}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.badge{display:inline-block;padding:8px 14px;border-radius:30px;background:#e7edff;color:#294bd1;font-weight:700;font-size:13px;margin-bottom:18px}
+h1{font-size:clamp(42px,7vw,72px);line-height:1.02;letter-spacing:-3px;margin-bottom:20px}
+.hero h1 span{color:var(--primary)}
+.hero p{font-size:19px;color:var(--muted);max-width:650px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{padding:13px 20px;border-radius:12px;font-weight:700;border:1px solid transparent;display:inline-block}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-secondary{background:#fff;border-color:var(--line)}
+.visual{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:25px;box-shadow:0 20px 50px rgba(30,41,59,.09)}
+.formula{font-size:58px;font-weight:800;text-align:center;padding:25px 0;color:var(--primary)}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mini{padding:17px;border-radius:15px;background:#f7f9ff;border:1px solid #e8edff}
+.mini b{display:block;font-size:20px}
+section{padding:75px 0}
+.section-head{margin-bottom:35px}
+.section-head h2{font-size:36px;letter-spacing:-1px}
+.section-head p{color:var(--muted);margin-top:8px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:25px;transition:.2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(15,23,42,.08)}
+.icon{font-size:34px;margin-bottom:14px}
+.card h3{margin-bottom:7px}
+.card p{color:var(--muted);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.chip{padding:8px 12px;background:#f1f5ff;border-radius:30px;color:#3150c8;font-size:13px;font-weight:700}
+.alt{background:#fff}
+.exam{background:var(--dark);color:#fff}
+.exam .section-head p{color:#aab4c6}
+.exam .card{background:#1b2434;border-color:#2d3748}
+.exam .card p{color:#b8c2d3}
+.resource{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.resource a{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;font-weight:700}
+.resource a:hover{border-color:var(--primary);color:var(--primary)}
+.contact{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px}
+form{background:#fff;border:1px solid var(--line);padding:25px;border-radius:20px}
+label{font-size:13px;font-weight:700;display:block;margin:12px 0 6px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #dbe1ea;border-radius:10px;font:inherit}
+textarea{min-height:130px;resize:vertical}
+footer{background:#0b1020;color:#aeb8ca;padding:35px 0}
+.footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer strong{color:#fff;font-size:21px}
+@media(max-width:800px){
+nav{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;padding:18px;flex-direction:column;border-bottom:1px solid var(--line)}
+nav.open{display:flex}
+.menu{display:block}
+.hero-grid,.contact{grid-template-columns:1fr}
+.cards{grid-template-columns:1fr 1fr}
+.resource{grid-template-columns:1fr 1fr}
+.hero{padding-top:55px}
+}
+@media(max-width:520px){
+.cards,.resource{grid-template-columns:1fr}
+section{padding:55px 0}
+h1{letter-spacing:-2px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="container nav">
+<a class="logo" href="#home">Khu<span>shnoor</span></a>
+<button class="menu" aria-label="Menu" onclick="toggleMenu()">☰</button>
+<nav id="nav">
+<a href="#home">Home</a><a href="#about">About</a><a href="#maths">Mathematics</a><a href="#science">Science</a><a href="#exams">Exams</a><a href="#blog">Blog</a><a href="#contact">Contact</a>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div>
+<span class="badge">PERSONAL LEARNING PLATFORM</span>
+<h1>Learn. <span>Understand.</span> Grow.</h1>
+<p>Welcome to <b>Khushnoor</b> — a student-friendly learning space for Mathematics, Science, Social Science and competitive-exam preparation.</p>
+<div class="buttons"><a class="btn btn-primary" href="#maths">Start Learning</a><a class="btn btn-secondary" href="#resources">Explore Resources</a></div>
+</div>
+<div class="visual">
+<div class="formula">E = mc²</div>
+<div class="mini-grid">
+<div class="mini"><b>📐 Maths</b><small>Concepts & Practice</small></div>
+<div class="mini"><b>🔬 Science</b><small>Understand the Why</small></div>
+<div class="mini"><b>🎯 Exams</b><small>SSC • BPSC • NTPC</small></div>
+<div class="mini"><b>🧠 Tricks</b><small>Mental & Vedic Math</small></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<div class="section-head"><h2>About Khushnoor</h2><p>Teaching with clarity, curiosity and strong fundamentals.</p></div>
+<div class="cards">
+<div class="card"><div class="icon">👨‍🏫</div><h3>Concept First</h3><p>Focus on understanding concepts instead of memorising formulas blindly.</p></div>
+<div class="card"><div class="icon">💡</div><h3>Simple Explanation</h3><p>Complex ideas are broken into simple, logical and student-friendly steps.</p></div>
+<div class="card"><div class="icon">🚀</div><h3>Practice to Mastery</h3><p>Learn the concept, solve problems, analyse mistakes and improve.</p></div>
+</div>
+</div>
+</section>
+
+<section class="alt" id="maths">
+<div class="container">
+<div class="section-head"><h2>📐 Mathematics</h2><p>Build mathematical thinking from fundamentals to competitive exams.</p></div>
+<div class="cards">
+<div class="card"><h3>Classes 6–8</h3><p>Number systems, algebra, geometry, mensuration, data handling and more.</p><div class="chips"><span class="chip">Notes</span><span class="chip">Practice</span></div></div>
+<div class="card"><h3>Classes 9–10</h3><p>Algebra, geometry, trigonometry, statistics and board-focused problem solving.</p><div class="chips"><span class="chip">Numericals</span><span class="chip">Formulas</span></div></div>
+<div class="card"><h3>Classes 11–12</h3><p>Functions, calculus, coordinate geometry, probability and higher mathematics.</p><div class="chips"><span class="chip">Concepts</span><span class="chip">Revision</span></div></div>
+<div class="card"><h3>Mental Math</h3><p>Fast calculation techniques for everyday mathematics and exams.</p></div>
+<div class="card"><h3>Vedic Math</h3><p>Useful calculation patterns and shortcuts with emphasis on understanding.</p></div>
+<div class="card"><h3>Practice Zone</h3><p>Chapter-wise questions, numerical problems and challenge questions.</p></div>
+</div>
+</div>
+</section>
+
+<section id="science">
+<div class="container">
+<div class="section-head"><h2>🔬 Science</h2><p>Understand the laws, processes and observations behind the world around us.</p></div>
+<div class="cards">
+<div class="card"><div class="icon">⚙️</div><h3>Physics</h3><p>Force, motion, work, energy, light, electricity and more.</p></div>
+<div class="card"><div class="icon">🧪</div><h3>Chemistry</h3><p>Matter, atoms, reactions, acids-bases, metals and chemical reasoning.</p></div>
+<div class="card"><div class="icon">🧬</div><h3>Biology</h3><p>Cells, life processes, heredity, environment and human biology.</p></div>
+</div>
+</div>
+</section>
+
+<section class="exam" id="exams">
+<div class="container">
+<div class="section-head"><h2>🎯 Competitive Exams</h2><p>Structured preparation resources for major Indian competitive examinations.</p></div>
+<div class="cards">
+<div class="card"><h3>SSC</h3><p>Quantitative Aptitude, Reasoning, General Awareness and practice.</p></div>
+<div class="card"><h3>BPSC</h3><p>General Studies, Bihar-focused knowledge and practice resources.</p></div>
+<div class="card"><h3>Railway NTPC</h3><p>Mathematics, Reasoning, General Awareness and previous-year practice.</p></div>
+</div>
+</div>
+</section>
+
+<section class="alt" id="resources">
+<div class="container">
+<div class="section-head"><h2>📚 Resources</h2><p>Quick access to learning material.</p></div>
+<div class="resource">
+<a href="#maths">📐 Maths Notes</a><a href="#science">🔬 Science Notes</a><a href="#maths">📝 Practice Sets</a><a href="#maths">📊 Formula Sheets</a>
+</div>
+</div>
+</section>
+
+<section id="blog">
+<div class="container">
+<div class="section-head"><h2>📰 Latest Learning Topics</h2><p>Ideas, explanations and observations to make learning interesting.</p></div>
+<div class="cards">
+<div class="card"><h3>Why do we learn Mathematics?</h3><p>Mathematics is more than calculation—it develops logical thinking and pattern recognition.</p></div>
+<div class="card"><h3>Science Around Us</h3><p>Everyday observations can become powerful science questions.</p></div>
+<div class="card"><h3>Smart Exam Preparation</h3><p>Concept + practice + revision + analysis is a powerful learning cycle.</p></div>
+</div>
+</div>
+</section>
+
+<section class="alt" id="contact">
+<div class="container contact">
+<div>
+<div class="section-head"><h2>📩 Contact</h2><p>Have a question, suggestion or learning request? Send a message.</p></div>
+<p><b>Khushnoor</b><br>Mathematics • Science • Social Science • Competitive Exams</p>
+</div>
+<form onsubmit="sendMessage(event)">
+<label>Name</label><input required placeholder="Your name">
+<label>Class</label><input placeholder="e.g. Class 9">
+<label>Subject</label><select><option>Mathematics</option><option>Science</option><option>Social Science</option><option>Competitive Exams</option></select>
+<label>Message</label><textarea required placeholder="Write your message..."></textarea>
+<button class="btn btn-primary" style="margin-top:15px;width:100%">Send Message</button>
+</form>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-row"><div><strong>Khushnoor</strong><br>Learn. Understand. Grow.</div><div>© <span id="year"></span> Khushnoor. All rights reserved.</div></div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('nav').classList.toggle('open')}
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));
+function sendMessage(e){e.preventDefault();alert('Thank you! Your message form is ready. To receive messages, connect this form to a form service or backend.');}
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
