@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Khushnoor - Mathematics, Science, Social Science and competitive exam learning platform.">
+<title>Khushnoor | Learn. Understand. Grow.</title>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--text:#172033;--muted:#64748b;--primary:#315efb;--primary2:#6d4aff;--line:#e6eaf2;--dark:#101827;--success:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--primary)}
+nav{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:12px 4%;flex-direction:column}
+nav.open{display:flex}
+nav a{padding:10px 0;font-weight:700;font-size:14px;color:#475569}
+.menu{display:block;border:0;background:none;font-size:28px;padding:5px}
+.hero{padding:58px 0 48px;background:linear-gradient(135deg,#eef3ff,#fbf8ff 60%,#fff)}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+.badge{display:inline-block;padding:7px 12px;border-radius:30px;background:#e7edff;color:#294bd1;font-weight:800;font-size:11px;margin-bottom:15px}
+h1{font-size:clamp(42px,12vw,72px);line-height:.98;letter-spacing:-3px;margin-bottom:18px}
+.hero h1 span{color:var(--primary)}
+.hero p{font-size:16px;color:var(--muted);max-width:650px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{padding:12px 17px;border-radius:11px;font-weight:800;border:1px solid transparent;display:inline-block;cursor:pointer}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-secondary{background:#fff;border-color:var(--line)}
+.visual{background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 18px 45px rgba(30,41,59,.09)}
+.formula{font-size:46px;font-weight:900;text-align:center;padding:18px 0;color:var(--primary)}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.mini{padding:13px;border-radius:13px;background:#f7f9ff;border:1px solid #e8edff;font-size:12px}
+.mini b{display:block;font-size:16px}
+section{padding:58px 0}
+.alt{background:#fff}
+.exam{background:var(--dark);color:#fff}
+.section-head{margin-bottom:24px}
+.section-head h2{font-size:29px;letter-spacing:-1px}
+.section-head p{color:var(--muted);font-size:13px;margin-top:5px}
+.exam .section-head p{color:#aab4c6}
+.cards{display:grid;grid-template-columns:1fr;gap:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:19px;transition:.2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(15,23,42,.07)}
+.icon{font-size:29px;margin-bottom:10px}
+.card h3{font-size:17px;margin-bottom:5px}
+.card p{color:var(--muted);font-size:12px}
+.exam .card{background:#192336;border-color:#2b374b}
+.exam .card p{color:#b8c2d3}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.chip{padding:6px 9px;background:#eef3ff;border-radius:30px;color:#3150c8;font-size:11px;font-weight:800;cursor:pointer}
+.resource{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.resource a{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;font-weight:800;font-size:12px}
+.resource a:hover{border-color:var(--primary);color:var(--primary)}
+.contact{display:grid;grid-template-columns:1fr;gap:24px}
+form{background:#fff;border:1px solid var(--line);padding:20px;border-radius:18px}
+label{font-size:12px;font-weight:800;display:block;margin:10px 0 5px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #dbe1ea;border-radius:9px;background:#fff}
+textarea{min-height:115px;resize:vertical}
+footer{background:#0b1020;color:#aeb8ca;padding:30px 0}
+.footer-row{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:12px}
+footer strong{color:#fff;font-size:19px}
+.study-search{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:18px}
+.study-search input{font-size:14px}
+#searchResults{font-size:13px}
+#noteBox,#quizBox{font-size:14px}
+@media(min-width:600px){
+.cards{grid-template-columns:1fr 1fr}
+.resource{grid-template-columns:repeat(4,1fr)}
+.hero{padding:72px 0 60px}
+}
+@media(min-width:850px){
+.nav{min-height:72px}
+.menu{display:none}
+nav{display:flex;position:static;background:none;border:0;padding:0;flex-direction:row;gap:20px}
+nav a{padding:0;font-size:12px}
+.hero-grid{grid-template-columns:1.1fr .9fr;gap:45px}
+.cards{grid-template-columns:repeat(3,1fr)}
+.contact{grid-template-columns:.8fr 1.2fr}
+section{padding:72px 0}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="container nav">
+<a class="logo" href="#home">Khu<span>shnoor</span></a>
+<button class="menu" aria-label="Menu" onclick="toggleMenu()">☰</button>
+<nav id="nav">
+<a href="#home">Home</a><a href="#about">About</a><a href="#classes">Classes</a><a href="#maths">Mathematics</a><a href="#science">Science</a><a href="#exams">Exams</a><a href="#study">Study Hub</a><a href="#blog">Blog</a><a href="#contact">Contact</a>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div>
+<span class="badge">PERSONAL LEARNING PLATFORM</span>
+<h1>Learn. <span>Understand.</span> Grow.</h1>
+<p>Welcome to <b>Khushnoor</b> — a student-friendly learning space for Mathematics, Science, Social Science and competitive-exam preparation.</p>
+<div class="buttons"><a class="btn btn-primary" href="#maths">Start Learning</a><a class="btn btn-secondary" href="#resources">Explore Resources</a></div>
+</div>
+<div class="visual">
+<div class="formula">E = mc²</div>
+<div class="mini-grid">
+<div class="mini"><b>📐 Maths</b><small>Concepts & Practice</small></div>
+<div class="mini"><b>🔬 Science</b><small>Understand the Why</small></div>
+<div class="mini"><b>🎯 Exams</b><small>SSC • BPSC • NTPC</small></div>
+<div class="mini"><b>🧠 Tricks</b><small>Mental & Vedic Math</small></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<div class="section-head"><h2>About Khushnoor</h2><p>Teaching with clarity, curiosity and strong fundamentals.</p></div>
+<div class="cards">
+<div class="card"><div class="icon">👨‍🏫</div><h3>Concept First</h3><p>Focus on understanding concepts instead of memorising formulas blindly.</p></div>
+<div class="card"><div class="icon">💡</div><h3>Simple Explanation</h3><p>Complex ideas are broken into simple, logical and student-friendly steps.</p></div>
+<div class="card"><div class="icon">🚀</div><h3>Practice to Mastery</h3><p>Learn the concept, solve problems, analyse mistakes and improve.</p></div>
+</div>
+</div>
+</section>
+
+<section class="alt" id="maths">
+<div class="container">
+<div class="section-head"><h2>📐 Mathematics</h2><p>Build mathematical thinking from fundamentals to competitive exams.</p></div>
+<div class="cards">
+<div class="card"><h3>Classes 6–8</h3><p>Number systems, algebra, geometry, mensuration, data handling and more.</p><div class="chips"><span class="chip">Notes</span><span class="chip">Practice</span></div></div>
+<div class="card"><h3>Classes 9–10</h3><p>Algebra, geometry, trigonometry, statistics and board-focused problem solving.</p><div class="chips"><span class="chip">Numericals</span><span class="chip">Formulas</span></div></div>
+<div class="card"><h3>Classes 11–12</h3><p>Functions, calculus, coordinate geometry, probability and higher mathematics.</p><div class="chips"><span class="chip">Concepts</span><span class="chip">Revision</span></div></div>
+<div class="card"><h3>Mental Math</h3><p>Fast calculation techniques for everyday mathematics and exams.</p></div>
+<div class="card"><h3>Vedic Math</h3><p>Useful calculation patterns and shortcuts with emphasis on understanding.</p></div>
+<div class="card"><h3>Practice Zone</h3><p>Chapter-wise questions, numerical problems and challenge questions.</p></div>
+</div>
+</div>
+</section>
+
+<section id="science">
+<div class="container">
+<div class="section-head"><h2>🔬 Science</h2><p>Understand the laws, processes and observations behind the world around us.</p></div>
+<div class="cards">
+<div class="card"><div class="icon">⚙️</div><h3>Physics</h3><p>Force, motion, work, energy, light, electricity and more.</p></div>
+<div class="card"><div class="icon">🧪</div><h3>Chemistry</h3><p>Matter, atoms, reactions, acids-bases, metals and chemical reasoning.</p></div>
+<div class="card"><div class="icon">🧬</div><h3>Biology</h3><p>Cells, life processes, heredity, environment and human biology.</p></div>
+</div>
+</div>
+</section>
+
+<section class="exam" id="exams">
+<div class="container">
+<div class="section-head"><h2>🎯 Competitive Exams</h2><p>Structured preparation resources for major Indian competitive examinations.</p></div>
+<div class="cards">
+<div class="card"><h3>SSC</h3><p>Quantitative Aptitude, Reasoning, General Awareness and practice.</p></div>
+<div class="card"><h3>BPSC</h3><p>General Studies, Bihar-focused knowledge and practice resources.</p></div>
+<div class="card"><h3>Railway NTPC</h3><p>Mathematics, Reasoning, General Awareness and previous-year practice.</p></div>
+</div>
+</div>
+</section>
+
+
+
+<section class="alt" id="classes">
+<div class="container">
+<div class="section-head">
+<h2>🎓 Classes 6–12</h2>
+<p>Choose your class to explore the learning roadmap.</p>
+</div>
+<div class="cards">
+<div class="card"><h3>Class 6</h3><p>Numbers, fractions, geometry, basic algebra and data.</p><div class="chips"><span class="chip" onclick="showNote('Class 6 Maths','Start with number systems, factors, multiples, fractions and basic geometry.')">Maths</span><span class="chip">Science</span></div></div>
+<div class="card"><h3>Class 7</h3><p>Integers, rational numbers, equations, lines and practical science.</p><div class="chips"><span class="chip" onclick="showNote('Class 7 Maths','Focus on integers, fractions, simple equations, ratio and geometry.')">Maths</span><span class="chip">Science</span></div></div>
+<div class="card"><h3>Class 8</h3><p>Algebra, mensuration, graphs, comparing quantities and science concepts.</p><div class="chips"><span class="chip" onclick="showNote('Class 8 Maths','Revise linear equations, algebraic expressions, mensuration and graphs.')">Maths</span><span class="chip">Science</span></div></div>
+<div class="card"><h3>Class 9</h3><p>Number systems, polynomials, coordinate geometry, motion and force.</p><div class="chips"><span class="chip" onclick="showNote('Class 9 Maths','Important areas: number systems, polynomials, coordinate geometry, lines and triangles.')">Maths</span><span class="chip">Physics</span></div></div>
+<div class="card"><h3>Class 10</h3><p>Quadratic equations, trigonometry, statistics, light and electricity.</p><div class="chips"><span class="chip" onclick="showNote('Class 10 Maths','Revise real numbers, polynomials, pair of linear equations, trigonometry and statistics.')">Maths</span><span class="chip">Science</span></div></div>
+<div class="card"><h3>Class 11–12</h3><p>Functions, calculus, coordinate geometry, probability and higher science.</p><div class="chips"><span class="chip" onclick="showNote('Class 11–12 Maths','Build strong foundations in functions, limits, derivatives, integrals, vectors and probability.')">Maths</span><span class="chip">Science</span></div></div>
+</div>
+</div>
+</section>
+
+<section id="study">
+<div class="container">
+<div class="section-head">
+<h2>🔎 Study Hub</h2>
+<p>Search topics, open quick notes and test your understanding.</p>
+</div>
+
+<div style="background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;margin-bottom:22px">
+<input id="siteSearch" oninput="searchStudy()" placeholder="Search: force, algebra, light, SSC..." aria-label="Search study topics">
+<div id="searchResults" style="margin-top:14px;color:var(--muted)"></div>
+</div>
+
+<div class="cards">
+<div class="card">
+<div class="icon">📘</div>
+<h3>Quick Notes</h3>
+<p>Short, revision-friendly concepts for school and competitive-exam preparation.</p>
+<div class="chips"><span class="chip" onclick="showNote('बल (Force)','Force is a push or pull that can change the state of motion or shape of an object.')">Force</span><span class="chip" onclick="showNote('परिणामी बल','When several forces act together, their vector sum is called the resultant force.')">Resultant Force</span></div>
+</div>
+<div class="card">
+<div class="icon">🧠</div>
+<h3>Formula Bank</h3>
+<p>Keep important formulas ready for quick revision.</p>
+<div class="chips"><span class="chip" onclick="showNote('Speed','Speed = Distance ÷ Time')">Speed</span><span class="chip" onclick="showNote('Percentage','Percentage = (Part ÷ Whole) × 100')">Percentage</span></div>
+</div>
+<div class="card">
+<div class="icon">🎯</div>
+<h3>Mini Quiz</h3>
+<p>Try a quick question and instantly check your answer.</p>
+<button class="btn btn-primary" onclick="startQuiz()">Start Quiz</button>
+</div>
+</div>
+
+<div id="noteBox" style="display:none;margin-top:20px;background:#eef3ff;border:1px solid #dce5ff;border-radius:18px;padding:22px"></div>
+<div id="quizBox" style="display:none;margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px"></div>
+</div>
+</section>
+
+<section class="alt" id="resources">
+<div class="container">
+<div class="section-head"><h2>📚 Resources</h2><p>Quick access to learning material. More chapter-wise content can be added anytime.</p></div>
+<div class="resource">
+<a href="#maths">📐 Maths Notes</a><a href="#science">🔬 Science Notes</a><a href="#maths">📝 Practice Sets</a><a href="#maths">📊 Formula Sheets</a>
+</div>
+</div>
+</section>
+
+<section id="blog">
+<div class="container">
+<div class="section-head"><h2>📰 Latest Learning Topics</h2><p>Ideas, explanations and observations to make learning interesting.</p></div>
+<div class="cards">
+<div class="card"><h3>Why do we learn Mathematics?</h3><p>Mathematics is more than calculation—it develops logical thinking and pattern recognition.</p></div>
+<div class="card"><h3>Science Around Us</h3><p>Everyday observations can become powerful science questions.</p></div>
+<div class="card"><h3>Smart Exam Preparation</h3><p>Concept + practice + revision + analysis is a powerful learning cycle.</p></div>
+</div>
+</div>
+</section>
+
+<section class="alt" id="contact">
+<div class="container contact">
+<div>
+<div class="section-head"><h2>📩 Contact</h2><p>Have a question, suggestion or learning request? Send a message.</p></div>
+<p><b>Khushnoor</b><br>Mathematics • Science • Social Science • Competitive Exams</p>
+</div>
+<form onsubmit="sendMessage(event)">
+<label>Name</label><input required placeholder="Your name">
+<label>Class</label><input placeholder="e.g. Class 9">
+<label>Subject</label><select><option>Mathematics</option><option>Science</option><option>Social Science</option><option>Competitive Exams</option></select>
+<label>Message</label><textarea required placeholder="Write your message..."></textarea>
+<button class="btn btn-primary" style="margin-top:15px;width:100%">Send Message</button>
+</form>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-row"><div><strong>Khushnoor</strong><br>Learn. Understand. Grow.</div><div>© <span id="year"></span> Khushnoor. All rights reserved.</div></div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('nav').classList.toggle('open')}
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav').classList.remove('open')));
+
+const topics=[
+ {t:'Force',k:'force बल physics',d:'Force is a push or pull that can change motion or shape.'},
+ {t:'Resultant Force',k:'resultant force parinami bal physics',d:'The resultant force is the vector sum of all forces acting on an object.'},
+ {t:'Speed',k:'speed gati physics',d:'Speed = Distance ÷ Time.'},
+ {t:'Percentage',k:'percentage maths',d:'Percentage = (Part ÷ Whole) × 100.'},
+ {t:'Algebra',k:'algebra maths class 9',d:'Algebra uses symbols and variables to represent numbers and relationships.'},
+ {t:'Light',k:'light optics science',d:'Light is electromagnetic radiation visible to the human eye.'},
+ {t:'SSC',k:'ssc competitive exam',d:'Use the exam section for quantitative aptitude, reasoning and general awareness practice.'},
+ {t:'BPSC',k:'bpsc competitive exam',d:'Use structured revision and Bihar-focused general studies practice.'}
+];
+
+function searchStudy(){
+ const q=document.getElementById('siteSearch').value.toLowerCase().trim();
+ const box=document.getElementById('searchResults');
+ if(!q){box.innerHTML='Try searching a topic such as <b>force</b>, <b>algebra</b>, <b>light</b> or <b>SSC</b>.';return;}
+ const found=topics.filter(x=>(x.t+' '+x.k+' '+x.d).toLowerCase().includes(q));
+ box.innerHTML=found.length?found.map(x=>`<div style="padding:10px 0;border-bottom:1px solid var(--line)"><b>${x.t}</b><br><span>${x.d}</span></div>`).join(''):'No topic found. Try another keyword.';
+}
+
+function showNote(title,text){
+ const box=document.getElementById('noteBox');
+ box.style.display='block';
+ box.innerHTML=`<h3>📘 ${title}</h3><p style="margin-top:8px">${text}</p>`;
+ box.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+const quiz=[
+ {q:'बल की SI इकाई क्या है?',a:['जूल','न्यूटन','वाट','पास्कल'],c:1},
+ {q:'Speed का सूत्र क्या है?',a:['Time ÷ Distance','Distance × Time','Distance ÷ Time','Distance + Time'],c:2},
+ {q:'25% of 200 कितना है?',a:['25','40','50','75'],c:2}
+];
+let qi=0;
+function startQuiz(){
+ qi=0; renderQuiz();
+ document.getElementById('quizBox').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function renderQuiz(){
+ const box=document.getElementById('quizBox'); box.style.display='block';
+ const x=quiz[qi];
+ box.innerHTML=`<h3>🧠 Question ${qi+1}/${quiz.length}</h3><p style="font-size:18px;font-weight:700;margin:10px 0">${x.q}</p>`+
+ x.a.map((o,i)=>`<button class="btn btn-secondary" style="display:block;width:100%;text-align:left;margin:8px 0" onclick="answerQuiz(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+}
+function answerQuiz(i){
+ const x=quiz[qi],box=document.getElementById('quizBox');
+ if(i===x.c){
+   box.innerHTML=`<h3>✅ Correct!</h3><p>बहुत बढ़िया।</p><button class="btn btn-primary" onclick="nextQuiz()">Next</button>`;
+ }else{
+   box.innerHTML=`<h3>❌ Not quite</h3><p>सही उत्तर: <b>${x.a[x.c]}</b></p><button class="btn btn-primary" onclick="nextQuiz()">Next</button>`;
+ }
+}
+function nextQuiz(){
+ qi++;
+ if(qi<quiz.length) renderQuiz();
+ else document.getElementById('quizBox').innerHTML='<h3>🎉 Quiz Complete!</h3><p>अब फिर से practice करके अपना score improve करो.</p><button class="btn btn-primary" onclick="startQuiz()">Try Again</button>';
+}
+function sendMessage(e){e.preventDefault();alert('Thank you! Your message form is ready. To receive messages, connect this form to a form service or backend.');}
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
