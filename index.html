@@ -68,6 +68,15 @@ footer strong{color:#fff;font-size:19px}
 .study-search input{font-size:14px}
 #searchResults{font-size:13px}
 #noteBox,#quizBox{font-size:14px}
+
+.profile-card{display:flex;align-items:center;gap:20px;margin-top:25px;padding:18px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 10px 28px rgba(30,41,59,.06)}
+.profile-photo{width:96px;height:96px;border-radius:50%;object-fit:cover;object-position:center 28%;border:4px solid #eef3ff}
+.profile-info h3{font-size:20px;margin-bottom:2px}
+.profile-info p{font-size:12px;color:var(--muted)}
+.about-photo{width:100%;max-width:320px;height:360px;object-fit:cover;object-position:center 28%;border-radius:22px;border:1px solid var(--line);box-shadow:0 15px 35px rgba(30,41,59,.10)}
+.about-grid{display:grid;grid-template-columns:1fr;gap:25px;align-items:center}
+@media(min-width:850px){.about-grid{grid-template-columns:.7fr 1.3fr}}
+
 @media(min-width:600px){
 .cards{grid-template-columns:1fr 1fr}
 .resource{grid-template-columns:repeat(4,1fr)}
@@ -104,6 +113,10 @@ section{padding:72px 0}
 <h1>Learn. <span>Understand.</span> Grow.</h1>
 <p>Welcome to <b>Khushnoor</b> — a student-friendly learning space for Mathematics, Science, Social Science and competitive-exam preparation.</p>
 <div class="buttons"><a class="btn btn-primary" href="#maths">Start Learning</a><a class="btn btn-secondary" href="#resources">Explore Resources</a></div>
+<div class="profile-card">
+<img class="profile-photo" src="khushnoor.jpg" alt="Khushnoor">
+<div class="profile-info"><h3>Khushnoor</h3><p>Mathematics • Science • Social Science • Competitive Exams</p></div>
+</div>
 </div>
 <div class="visual">
 <div class="formula">E = mc²</div>
@@ -120,10 +133,13 @@ section{padding:72px 0}
 <section id="about">
 <div class="container">
 <div class="section-head"><h2>About Khushnoor</h2><p>Teaching with clarity, curiosity and strong fundamentals.</p></div>
+<div class="about-grid">
+<div><img class="about-photo" src="khushnoor.jpg" alt="Khushnoor - Teacher"></div>
 <div class="cards">
 <div class="card"><div class="icon">👨‍🏫</div><h3>Concept First</h3><p>Focus on understanding concepts instead of memorising formulas blindly.</p></div>
 <div class="card"><div class="icon">💡</div><h3>Simple Explanation</h3><p>Complex ideas are broken into simple, logical and student-friendly steps.</p></div>
 <div class="card"><div class="icon">🚀</div><h3>Practice to Mastery</h3><p>Learn the concept, solve problems, analyse mistakes and improve.</p></div>
+</div>
 </div>
 </div>
 </section>
