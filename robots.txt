@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://khushnoorm.github.io/sitemap.xml
