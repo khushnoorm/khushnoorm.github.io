@@ -1,7 +1,340 @@
-<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>संख्या पद्धति ऑनलाइन टेस्ट | Khushnoor</title><meta name="description" content="कक्षा 9 संख्या पद्धति का समयबद्ध MCQ टेस्ट, तुरंत स्कोर और उत्तर की व्याख्या।"><link rel="stylesheet" href="assets/styles.css"></head><body><header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">K</span>Khush<em>noor</em></a><div class="nav-actions"><button class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</button></div></div></header><main><section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="index.html">होम</a> / टेस्ट / संख्या पद्धति</div><span class="badge">कक्षा 9 • गणित</span><h1>संख्या पद्धति टेस्ट</h1><p>5 प्रश्न • 5 अंक • 5 मिनट</p></div></section><section style="padding-top:0"><div class="container"><div id="start" class="card"><h2>टेस्ट शुरू करने से पहले</h2><ul class="checklist"><li>✓ हर प्रश्न में केवल एक सही उत्तर है।</li><li>✓ प्रश्न बाद में देखने के लिए चिह्नित कर सकते हैं।</li><li>✓ समय पूरा होने पर टेस्ट अपने-आप जमा होगा।</li></ul><button class="btn btn-primary" onclick="startTest()">टेस्ट शुरू करें →</button></div><div id="exam" hidden><div class="test-top"><b id="counter">प्रश्न 1/5</b><span class="timer" id="timer">05:00</span></div><br><div class="test-shell"><article class="card"><span class="badge" id="qtag">MCQ</span><h2 id="question"></h2><div class="quiz-options" id="options"></div><div class="lesson-actions"><button class="btn btn-ghost" onclick="markReview()">⚑ बाद में देखें</button></div></article><aside class="card test-side"><h3>प्रश्न सूची</h3><div class="question-nav" id="nav"></div><div class="meta"><span>हरा: हल किया</span><span>पीला: समीक्षा</span></div></aside><div style="display:flex;justify-content:space-between;gap:10px"><button class="btn btn-secondary" onclick="move(-1)">← पिछला</button><button class="btn btn-primary" onclick="move(1)">अगला →</button></div><button class="btn btn-secondary" onclick="confirmSubmit()">टेस्ट जमा करें</button></div></div><div id="result" hidden></div></div></section></main><script src="assets/app.js"></script><script>
-const Q=[{q:'निम्न में से कौन-सी अपरिमेय संख्या है?',o:['3/5','0.75','√2','−8'],a:2,e:'√2 का दशमलव प्रसार अनंत और अनावर्ती है।'},{q:'शून्य किस समुच्चय का सदस्य है?',o:['केवल प्राकृतिक','पूर्ण संख्याएँ','केवल अपरिमेय','इनमें से कोई नहीं'],a:1,e:'पूर्ण संख्याएँ 0, 1, 2, 3, … होती हैं।'},{q:'2³ × 2² का मान क्या है?',o:['2⁵','4⁵','2⁶','4⁶'],a:0,e:'समान आधार के गुणन में घात जुड़ते हैं: 2³⁺² = 2⁵।'},{q:'1/3 का दशमलव प्रसार कैसा है?',o:['सांत','असांत आवर्ती','असांत अनावर्ती','पूर्णांक'],a:1,e:'1/3 = 0.333… असांत और आवर्ती है।'},{q:'कौन-सा संबंध सही है?',o:['R ⊂ Q','Z ⊂ W','N ⊂ W','Q ⊂ Z'],a:2,e:'हर प्राकृतिक संख्या पूर्ण संख्या है, इसलिए N ⊂ W।'}];let current=0,answers=Array(Q.length).fill(null),review=new Set(),secs=300,tick,started=0;
-function startTest(){started=Date.now();document.getElementById('start').hidden=true;document.getElementById('exam').hidden=false;render();tick=setInterval(()=>{secs--;document.getElementById('timer').textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');if(secs<=0)submit()},1000)}
-function render(){let x=Q[current];counter.textContent=`प्रश्न ${current+1}/${Q.length}`;question.textContent=x.q;options.innerHTML=x.o.map((v,i)=>`<button class="option ${answers[current]===i?'selected':''}" onclick="choose(${i})"><b>${String.fromCharCode(65+i)}.</b> ${v}</button>`).join('');nav.innerHTML=Q.map((_,i)=>`<button class="qdot ${i===current?'current':''} ${answers[i]!==null?'done':''} ${review.has(i)?'review':''}" onclick="current=${i};render()">${i+1}</button>`).join('')}
-function choose(i){answers[current]=i;render()}function move(d){current=Math.max(0,Math.min(Q.length-1,current+d));render()}function markReview(){review.add(current);move(1)}function confirmSubmit(){if(confirm(`आपने ${answers.filter(x=>x!==null).length}/${Q.length} प्रश्न हल किए हैं। टेस्ट जमा करें?`))submit()}
-function submit(){clearInterval(tick);exam.hidden=true;let correct=Q.filter((x,i)=>answers[i]===x.a).length,pct=Math.round(correct/Q.length*100),used=Math.round((Date.now()-started)/1000);localStorage.setItem('bestScore',Math.max(Number(localStorage.getItem('bestScore')||0),pct));result.hidden=false;result.innerHTML=`<div class="card"><div class="result-ring" style="--score:${pct}%"><div><b style="font-size:2rem">${pct}%</b><small>${correct}/${Q.length} सही</small></div></div><h2 style="text-align:center">${pct>=60?'बहुत बढ़िया!':'अभ्यास जारी रखें'}</h2><div class="stats"><div class="stat"><b>${correct}</b><small>सही</small></div><div class="stat"><b>${Q.length-correct}</b><small>गलत</small></div><div class="stat"><b>${Math.floor(used/60)}:${String(used%60).padStart(2,'0')}</b><small>समय</small></div><div class="stat"><b>${pct}%</b><small>सटीकता</small></div></div></div><h2>प्रश्नवार विश्लेषण</h2>${Q.map((x,i)=>`<div class="card" style="margin:10px 0"><b>${i+1}. ${x.q}</b><p style="color:${answers[i]===x.a?'var(--success)':'var(--danger)'}">आपका उत्तर: ${answers[i]===null?'नहीं दिया':x.o[answers[i]]}</p><p><b>सही उत्तर:</b> ${x.o[x.a]}</p><p>${x.e}</p></div>`).join('')}<div class="lesson-actions"><a class="btn btn-primary" href="test.html">फिर से दें</a><a class="btn btn-secondary" href="dashboard.html">डैशबोर्ड देखें</a></div>`;scrollTo(0,0)}
+<!doctype html><html lang="hi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>संख्या पद्धति — समयबद्ध ऑनलाइन टेस्ट | Khushnoor</title><meta name="description" content="कक्षा 9 संख्या पद्धति का समयबद्ध MCQ टेस्ट। 10/20/50 प्रश्न, स्वचालित जमा, स्कोर और विश्लेषण।"><link rel="canonical" href="https://khushnoorm.github.io/test.html"><link rel="stylesheet" href="assets/styles.css"></head><body><a class="skip" href="#start">शुरू करें</a><header class="site-header"><div class="container nav-wrap"><a class="brand" href="index.html"><span class="brand-mark">K</span>Khush<em>noor</em></a><div class="nav-actions"><button class="icon-btn" id="themeBtn" onclick="toggleTheme()">🌙</button></div></div></header><main>
+
+<section class="page-hero"><div class="container"><div class="breadcrumbs"><a href="index.html">होम</a> / टेस्ट / संख्या पद्धति</div><span class="badge">कक्षा 9 • गणित • संख्या पद्धति</span><h1>समयबद्ध ऑनलाइन टेस्ट</h1><p class="lead">50 प्रश्नों का डेटाबेस। तुम चुनो — 10, 20 या 50 प्रश्न। समय स्वचालित रूप से घटेगा और समय पूरा होने पर टेस्ट अपने-आप जमा होगा।</p></div></section>
+
+<section id="start"><div class="container"><div class="card" style="max-width:660px;margin:0 auto"><h2>टेस्ट शुरू करने से पहले</h2><ul class="checklist" style="font-size:.9rem"><li>✓ हर प्रश्न में केवल एक सही उत्तर है।</li><li>✓ प्रश्न बाद में देखने के लिए चिह्नित (mark for review) कर सकते हो।</li><li>✓ समय पूरा होने पर टेस्ट अपने-आप जमा होगा।</li><li>✓ परिणाम में प्रश्नवार विश्लेषण और सही उत्तर दिखाए जाएँगे।</li><li>✓ तुम्हारा सबसे अच्छा स्कोर इसी डिवाइस में सुरक्षित रहता है।</li></ul>
+
+<div class="tool-tabs" style="margin:24px 0" role="tablist">
+<button class="tab active" data-mode="10" onclick="setMode(10,this)">तेज़ टेस्ट<br><small>10 प्रश्न • 5 मिनट</small></button>
+<button class="tab" data-mode="20" onclick="setMode(20,this)">मानक टेस्ट<br><small>20 प्रश्न • 10 मिनट</small></button>
+<button class="tab" data-mode="50" onclick="setMode(50,this)">पूर्ण टेस्ट<br><small>50 प्रश्न • 25 मिनट</small></button>
+</div>
+
+<div class="stats" style="margin:18px 0">
+<div class="stat"><b id="modeQ">10</b><small>प्रश्न</small></div>
+<div class="stat"><b id="modeTime">5:00</b><small>समय</small></div>
+<div class="stat"><b>50</b><small>कुल प्रश्न (डेटाबेस)</small></div>
+</div>
+
+<button class="btn btn-primary" style="width:100%;font-size:1.1rem" onclick="startTest()">टेस्ट शुरू करें →</button>
+<p style="text-align:center;color:var(--muted);font-size:.85rem;margin-top:14px">हर बार नया प्रश्न सेट (randomized) — अभ्यास के लिए बार-बार दोहराएँ।</p>
+</div></div></section>
+
+<section id="exam" hidden><div class="container">
+<div class="test-shell">
+<div style="position:sticky;top:68px;z-index:30">
+<div class="test-top"><b id="counter">प्रश्न 1/10</b><span class="timer" id="timer">05:00</span></div>
+<div class="question-nav" id="nav" style="margin-top:12px"></div>
+<div class="grid grid-2" style="margin-top:14px">
+<button class="btn btn-ghost" onclick="move(-1)" style="flex:1">← पिछला</button>
+<button class="btn btn-ghost" onclick="move(1)" style="flex:1">अगला →</button>
+</div>
+<button class="btn btn-secondary" onclick="confirmSubmit()" style="margin-top:14px;width:100%">📤 टेस्ट जमा करें</button>
+<button class="btn btn-ghost" onclick="confirmAbort()" style="margin-top:8px;width:100%;font-size:.85rem">⏹ टेस्ट छोड़ें (परिणाम नहीं मिलेगा)</button>
+</div>
+
+<article>
+<span class="badge" id="qtag">MCQ</span>
+<h2 id="question" style="margin:10px 0 16px;line-height:1.45"></h2>
+<div class="quiz-options" id="options"></div>
+<div class="lesson-actions" style="margin-top:16px">
+<button class="btn btn-ghost" id="markBtn" onclick="markReview()">⚑ बाद में देखें (Mark for Review)</button>
+<span id="markStatus" style="font-size:.8rem;color:var(--muted);align-self:center"></span>
+</div>
+</article>
+
+<div class="empty" id="reviewIndicator" style="display:none;margin-top:14px;padding:12px;background:var(--accent);color:#211600;border-radius:10px;font-size:.85rem;font-weight:700">⚑ 0 प्रश्न बाद में देखने के लिए चिह्नित</div>
+</div>
+
+<div id="result" hidden style="margin-top:30px"></div>
+</section>
+
+</main>
+
+<footer class="footer"><div class="container"><strong>Khushnoor</strong><div class="footer-bottom">© <span class="year"></span> • समझकर सीखें</div></div></footer>
+
+<script src="assets/app.js"></script>
+<script>
+/* =========================================================
+   CLASS 9 MATHS CHAPTER 1 — TIMED ONLINE TEST
+   Fully functional: start → exam → result flow
+   ========================================================= */
+const QDB = [
+{q:'प्राकृतिक संख्याओं का समुच्चय है:',o:['{0, 1, 2, 3, ...}','{1, 2, 3, 4, ...}','{..., -2, -1, 0, 1, 2, ...}','{0}'],a:1,e:'प्राकृतिक संख्याएँ (N) गिनती की संख्याएँ हैं। N = {1, 2, 3, …}। शून्य प्राकृतिक नहीं।',d:'Easy'},
+{q:'पूर्ण संख्याओं का समुच्चय है:',o:['{1, 2, 3, ...}','{0, 1, 2, 3, ...}','{-1, -2, -3, ...}','{0}'],a:1,e:'पूर्ण संख्याएँ (W) = प्राकृतिक + शून्य = {0, 1, 2, 3, …}।',d:'Easy'},
+{q:'निम्नलिखित में से कौन-सी प्राकृतिक संख्या नहीं है?',o:['1','0','5','100'],a:1,e:'0 एक पूर्ण संख्या है लेकिन प्राकृतिक नहीं (कक्षा 9 के अनुसार N = {1, 2, …})।',d:'Easy'},
+{q:'पूर्णांकों के समुच्चय को किस प्रतीक से दर्शाया जाता है?',o:['N','W','Z','Q'],a:2,e:'Z (जर्मन "Zahlen" = संख्याएँ) पूर्णांकों के लिए। N→प्राकृतिक, W→पूर्ण, Q→परिमेय।',d:'Easy'},
+{q:'निम्नलिखित में से कौन-सा कथन सत्य है?',o:['प्रत्येक पूर्ण संख्या एक प्राकृतिक संख्या है','प्रत्येक प्राकृतिक संख्या एक पूर्ण संख्या है','शून्य एक प्राकृतिक संख्या है','प्रत्येक पूर्णांक एक प्राकृतिक संख्या है'],a:1,e:'N ⊂ W — हर प्राकृतिक संख्या पूर्ण है। विलोम सत्य नहीं (0 पूर्ण है, प्राकृतिक नहीं)।',d:'Easy'},
+{q:'परिमेय संख्या की परिभाषा:',o:['वह संख्या जिसे p/q रूप में लिखा जा सके (p,q ∈ Z, q ≠ 0)','वह संख्या जिसका दशमलव प्रसार अनावर्ती हो','वह संख्या जो धनात्मक हो','वह संख्या जो पूर्णांक हो'],a:0,e:'परिमेय (Q) = {p/q : p,q ∈ Z, q ≠ 0}। दशमलव सांत या आवर्ती।',d:'Easy'},
+{q:'1/2 का दशमलव प्रसार कैसा है?',o:['असांत अनावर्ती','असांत आवर्ती','सांत','पूर्णांक'],a:2,e:'1/2 = 0.5, दो स्थानों पर समाप्त। हर = 2 = 2¹ → केवल 2,5 के गुणनखंड → सांत दशमलव।',d:'Easy'},
+{q:'1/3 का दशमलव प्रसार कैसा है?',o:['सांत','असांत आवर्ती','असांत अनावर्ती','पूर्णांक'],a:1,e:'1/3 = 0.333... = 0.3̅ — असांत आवर्ती। हर = 3 (2,5 नहीं) → असांत आवर्ती।',d:'Easy'},
+{q:'निम्नलिखित में से कौन-सी अपरिमेय संख्या है?',o:['0.5','√4','√2','2/3'],a:2,e:'√2 ≈ 1.41421356... असांत अनावर्ती → अपरिमेय। √4=2 परिमेय, 0.5=1/2 परिमेय, 2/3 आवर्ती परिमेय।',d:'Easy'},
+{q:'√9 का मान क्या है?',o:['3 (परिमेय)','3 (अपरिमेय)','4.5','√3'],a:0,e:'√9 = 3 = 3/1 → परिमेय। 9 एक पूर्ण वर्ग (perfect square) है, इसलिए इसका वर्गमूल परिमेय।',d:'Easy'},
+{q:'2³ × 2⁴ का मान है:',o:['2¹²','2⁷','4⁷','2⁻¹'],a:1,e:'aᵐ×aⁿ = aᵐ⁺ⁿ → 2³⁺⁴ = 2⁷ = 128। घातांक नहीं गुणा होते, जुड़ते हैं।',d:'Easy'},
+{q:'5⁰ का मान क्या है?',o:['0','1','5','10'],a:1,e:'a⁰ = 1 (a ≠ 0)। 5⁰ = 1, (−3)⁰ = 1, (π)⁰ = 1। 0⁰ परिभाषित नहीं।',d:'Easy'},
+{q:'3⁻² का मान है:',o:['−9','9','1/9','−1/9'],a:2,e:'a⁻ᵐ = 1/aᵐ → 3⁻² = 1/9। ऋणात्मक घात नकारात्मक नहीं, व्युत्क्रम देता है।',d:'Easy'},
+{q:'(2²)³ का मान है:',o:['2⁵','2⁶','2⁸','4⁶'],a:1,e:'(aᵐ)ⁿ = aᵐⁿ → (2²)³ = 2²ˣ³ = 2⁶ = 64। घातांक गुणा होते हैं।',d:'Easy'},
+{q:'aᵐ × aⁿ बराबर है:',o:['aᵐⁿ','aᵐ⁺ⁿ','aᵐ⁻ⁿ','aᵐ/ⁿ'],a:1,e:'गुणन नियम: aᵐ × aⁿ = aᵐ⁺ⁿ — समान आधार वाले गुणन में घात जुड़ते हैं।',d:'Easy'},
+{q:'संख्या रेखा पर 0 के दाईं ओर की संख्याएँ होती हैं:',o:['ऋणात्मक','शून्य','धनात्मक','अपरिमेय'],a:2,e:'0 के दाईं ओर सभी धनात्मक वास्तविक संख्याएँ। बाईं ओर ऋणात्मक।',d:'Easy'},
+{q:'कौन-सी संख्या संख्या रेखा पर 0 के बाईं ओर है?',o:['5','0','−3','1/2'],a:2,e:'−3 ऋणात्मक → 0 के बाईं ओर। 5 व 1/2 धनात्मक → दाईं ओर।',d:'Easy'},
+{q:'वास्तविक संख्याओं के समुच्चय में शामिल होते हैं:',o:['केवल परिमेय संख्याएँ','केवल अपरिमेय संख्याएँ','परिमेय और अपरिमेय दोनों','केवल पूर्णांक'],a:2,e:'R = Q ∪ {अपरिमेय} — वास्तविक संख्याएँ परिमेय + अपरिमेय दोनों हैं। N ⊂ W ⊂ Z ⊂ Q ⊂ R।',d:'Easy'},
+{q:'0.375 को p/q रूप (सह-अभाज्य) में लिखें:',o:['3/8','37/100','15/40','3/7'],a:0,e:'0.375 = 375/1000 = (125×3)/(125×8) = 3/8। 3 और 8 सह-अभाज्य (GCD=1)।',d:'Easy'},
+{q:'निम्नलिखित में से कौन-सी संख्या परिमेय है?',o:['π','√7','0.1010010001...','0.454545...'],a:3,e:'0.454545... = 0.4̅5̅ आवर्ती → परिमेय। π, √7 अपरिमेय। 0.1010010001... अनावर्ती → अपरिमेय।',d:'Easy'},
+
+{q:'√2 और √3 के बीच एक परिमेय संख्या है:',o:['1.4','1.5','1.8','2.0'],a:1,e:'1.5 = 3/2 (परिमेय), √2≈1.414 < 1.5 < 1.732≈√3 ✓। 1.4 < √2 (1.414) → √2 से छोटा, इसलिए बीच में नहीं।',d:'Moderate'},
+{q:'1/7 का दशमलव प्रसार है:',o:['0.142857142857...','0.14','0.142857','0.7'],a:0,e:'1/7 = 0.142857142857... = 0.1̅4̅2̅8̅5̅7̅ — 6 अंकों का आवर्ती ब्लॉक।',d:'Moderate'},
+{q:'0.125 को p/q रूप में (p,q सह-अभाज्य):',o:['125/1000','1/8','25/200','5/40'],a:1,e:'0.125 = 125/1000, GCD(125,1000)=125 → 1/8। 1 व 8 सह-अभाज्य।',d:'Moderate'},
+{q:'2⁻³ × 2⁵ का मान है:',o:['2²','2⁻⁸','1/4','4'],a:0,e:'2⁻³⁺⁵ = 2² = 4। विकल्प (a) 2² और (d) 4 दोनों सही हैं, गणितीय रूप a=2²।',d:'Moderate'},
+{q:'(3/4)⁻² का मान है:',o:['9/16','16/9','−9/16','−16/9'],a:1,e:'(3/4)⁻² = (4/3)² = 16/9। ऋणात्मक घात → व्युत्क्रम, फिर घात लगाएँ।',d:'Moderate'},
+{q:'√5 का सन्निकट मान (√5 संख्या रेखा पर किस क्षेत्र में?)',o:['1 और 2 के बीच','2 और 3 के बीच','3 और 4 के बीच','0 और 1 के बीच'],a:1,e:'√4=2, √9=3 → 2<√5<3, √5≈2.236।',d:'Moderate'},
+{q:'निम्नलिखित में से कौन-सा कथन सत्य नहीं है?',o:['सभी प्राकृतिक संख्याएँ पूर्ण हैं','सभी पूर्णांक परिमेय हैं','सभी परिमेय संख्याएँ पूर्णांक हैं','सभी पूर्ण संख्याएँ पूर्णांक हैं'],a:2,e:'(c) गलत: 1/2 परिमेय है लेकिन पूर्णांक नहीं। (a) N⊂W सत्य, (b) Z⊂Q सत्य (p/1), (d) W⊂Z सत्य।',d:'Moderate'},
+{q:'0.999... का मान है:',o:['0.9','1','0.99','0.999'],a:1,e:'x=0.999..., 10x=9.999..., 10x−x=9, 9x=9, x=1। आवर्ती 9 = 1।',d:'Moderate'},
+{q:'यदि a=2, तो a⁰+a¹+a² का मान है:',o:['3','4','5','7'],a:3,e:'2⁰+2¹+2² = 1+2+4 = 7। a⁰=1 (शून्य घात), a¹=2, a²=4।',d:'Moderate'},
+{q:'√18 को सरल करें:',o:['3√2','2√3','√9×2','9√2'],a:0,e:'√18 = √(9×2) = 3√2। 9=3² पूर्ण वर्ग → √9=3 निकलता है।',d:'Moderate'},
+{q:'निम्नलिखित में से कौन-सी अपरिमेय है?',o:['√(16/9)','√2','√(81/49)','√(4/100)'],a:1,e:'√(16/9)=4/3, √(81/49)=9/7, √(4/100)=2/10=0.2 — सभी परिमेय। √2 अपरिमेय (सिद्ध)।',d:'Moderate'},
+{q:'aᵐ÷aⁿ (a≠0) बराबर है:',o:['aᵐⁿ','aᵐ⁺ⁿ','aᵐ⁻ⁿ','aᵐ×ⁿ'],a:2,e:'भाग नियम: aᵐ÷aⁿ = aᵐ⁻ⁿ — समान आधार भाग में घात घटते हैं।',d:'Moderate'},
+{q:'(2/3)³ का मान है:',o:['8/27','6/9','2/27','8/9'],a:0,e:'(2/3)³ = 2³/3³ = 8/27। (a/b)ⁿ = aⁿ/bⁿ।',d:'Moderate'},
+{q:'दशमलव 0.121212... को p/q रूप में:',o:['4/33','12/100','1/12','12/90'],a:0,e:'x=0.121212..., 100x=12.121212..., 100x−x=12, 99x=12, x=12/99=4/33।',d:'Moderate'},
+{q:'संख्या रेखा पर −2/3 की स्थिति है:',o:['0 के दाईं ओर','0 के बाईं ओर, −1 और 0 के बीच','−1 के बाईं ओर','1 के दाईं ओर'],a:1,e:'−2/3=−0.666... ऋणात्मक → बाईं ओर। |−2/3|=2/3<1 → −1<−2/3<0।',d:'Moderate'},
+{q:'परिमेय संख्या का दशमलव सांत होता है यदि हर के गुणनखंड हों:',o:['केवल 2','केवल 5','केवल 2 और 5','कोई भी अभाज्य'],a:2,e:'q=2ᵐ×5ⁿ → सांत। q में 2,5 के अलावा गुणनखंड (3,7,11...) → असांत आवर्ती। उदा: 3/8=0.375 (सांत), 1/3=0.3̅ (असांत)।',d:'Moderate'},
+{q:'0.001 को p/q रूप में:',o:['1/100','1/1000','1/10000','10/1000'],a:1,e:'0.001 = 1/1000 (3 दशमलव स्थान → 10³=1000)।',d:'Moderate'},
+{q:'(5²)³÷5⁴ का मान है:',o:['5²','5⁻²','5⁶⁻⁴','5¹⁰'],a:0,e:'(5²)³÷5⁴ = 5⁶÷5⁴ = 5² = 25। (a) 5²=25, (c) 5⁶⁻⁴ भी 5² — (a) अधिक स्पष्ट।',d:'Moderate'},
+{q:'√3 का सन्निकट मान (दो दशमलव):',o:['1.41','1.73','2.24','2.83'],a:1,e:'√3≈1.732→1.73। (a) 1.41→√2, (c) 2.24→√5, (d) 2.83→√8।',d:'Moderate'},
+{q:'π के बारे में कौन-सा सत्य है?',o:['π परिमेय है','π पूर्णांक है','π अपरिमेय है','π=22/7 ठीक है'],a:2,e:'π=3.14159265... अपरिमेय (लैम्बर्ट, 1768)। 22/7≈3.142857 केवल सन्निकट।',d:'Moderate'},
+
+{q:'√2 की अपरिमेयता प्रमाण में यदि √2=p/q (p,q सह-अभाज्य), तो:',o:['p²=2q²→p सम→p=2k→q²=2k²→q सम→विरोधाभास!','p²=2q²→p ऋणात्मक→विरोधाभास','√2 को p/q में नहीं लिखा जा सकता क्योंकि π अपरिमेय','p,q दोनों विषम→√2 अपरिमेय'],a:0,e:'वर्जन विधि: √2=p/q→p²=2q²→p² सम→p सम→p=2k→4k²=2q²→q²=2k²→q सम→p,q दोनों सम→साझा गुणनखंड 2→विरोधाभास (सह-अभाज्य मान के विरुद्ध)→√2 अपरिमेय।',d:'Hard'},
+{q:'(64/27)⁻¹/³ का मान है:',o:['4/3','3/4','9/16','16/9'],a:1,e:'(64/27)⁻¹/³ = (27/64)¹/³ = (3³/4³)¹/³ = 3/4। ऋणात्मक → व्युत्क्रम, फिर घनमूल।',d:'Hard'},
+{q:'यदि x=√3+√2 और y=√3−√2, तो xy का मान है:',o:['1','2','3','5'],a:0,e:'xy=(√3+√2)(√3−√2)=3−2=1 (a²−b²=(a+b)(a−b) का व्युत्क्रम)।',d:'Hard'},
+{q:'दशमलव 0.333... को p/q (सह-अभाज्य) में:',o:['1/3','3/9','33/100','3/10'],a:0,e:'x=0.333..., 10x=3.333..., 10x−x=3, 9x=3, x=1/3। 3/9=1/3 लेकिन सह-अभाज्य रूप 1/3।',d:'Hard'},
+{q:'दशमलव 0.1666... को p/q में:',o:['1/6','16/99','1/16','16/100'],a:0,e:'x=0.16̅, 10x=1.6̅, 100x=16.6̅, 100x−10x=15, 90x=15, x=15/90=1/6।',d:'Hard'},
+{q:'√72 को सरलतम a√b में:',o:['6√2','8√3','3√8','2√18'],a:0,e:'√72=√(36×2)=6√2। 36=6² पूर्ण वर्ग → 6 बाहर। (c) 3√8=3√(4×2)=6√2 भी समान, लेकिन 6√2 सबसे सीधा।',d:'Hard'},
+{q:'3⁴×3⁵÷3⁶ का मान है:',o:['3³','3⁷','3²','3⁻²'],a:0,e:'3⁴⁺⁵⁻⁶=3⁹⁻⁶=3³=27। गुणन में जोड़, भाग में घटाव: aᵐ×aⁿ÷aᵖ=aᵐ⁺ⁿ⁻ᵖ।',d:'Hard'},
+{q:'√2 और √3 के बीच स्थित परिमेय संख्या:',o:['1.4','1.5','1.8','2.0'],a:1,e:'1.5=3/2, 1.414<1.5<1.732 ✓। 1.4<1.414(√2), 1.8>1.732(√3), 2.0>√3 → सही 1.5।',d:'Hard'},
+{q:'यदि 4ˣ=8, तो x का मान है:',o:['1','3/2','2','8/4=2'],a:1,e:'4ˣ=8, (2²)ˣ=2³, 2²ˣ=2³, 2x=3, x=3/2। जाँच: 4³/²=(√4)³=2³=8 ✓।',d:'Hard'},
+{q:'निम्नलिखित में से कौन-सी शून्य के बराबर नहीं है?',o:['5⁰','0⁵','0×100','0÷5'],a:0,e:'5⁰=1 (शून्य नहीं!)। 0⁵=0, 0×100=0, 0÷5=0। a⁰=1 (a≠0) — सबसे अधिक भ्रामक प्रश्न।',d:'Hard'}
+];
+
+let mode = 10;
+let Q = [];
+let current = 0;
+let answers = [];
+let review = new Set();
+let secs = 300;
+let tick = null;
+let started = 0;
+let timedOut = false;
+
+function setMode(m, btn) {
+  mode = m;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const times = {10: 300, 20: 600, 50: 1500};
+  secs = times[m];
+  document.getElementById('modeQ').textContent = m;
+  const min = Math.floor(secs/60), sec = secs%60;
+  document.getElementById('modeTime').textContent = `${min}:${String(sec).padStart(2,'0')}`;
+}
+
+function shuffle(arr) {
+  for (let i = arr.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function startTest() {
+  // Select and shuffle questions for this attempt
+  Q = shuffle([...QDB]).slice(0, mode);
+  answers = new Array(Q.length).fill(null);
+  review = new Set();
+  current = 0;
+  timedOut = false;
+  started = Date.now();
+
+  document.getElementById('start').hidden = true;
+  document.getElementById('exam').hidden = false;
+  document.getElementById('result').hidden = true;
+  document.getElementById('result').innerHTML = '';
+
+  render();
+  startTimer();
+}
+
+function startTimer() {
+  const tk = setInterval(() => {
+    secs--;
+    const min = Math.floor(secs/60), s = secs%60;
+    document.getElementById('timer').textContent =
+      `${String(min).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if (secs <= 0) {
+      clearInterval(tk);
+      timedOut = true;
+      submit(true);
+    }
+  }, 1000);
+  tick = tk;
+}
+
+function render() {
+  const x = Q[current];
+  document.getElementById('counter').textContent = `प्रश्न ${current+1}/${Q.length}`;
+  document.getElementById('question').textContent = x.q;
+  document.getElementById('qtag').textContent = x.d;
+  document.getElementById('options').innerHTML = x.o.map((v, i) =>
+    `<button class="option ${answers[current]===i?'selected':''}" onclick="choose(${i})"><b>${String.fromCharCode(65+i)}.</b> ${v}</button>`
+  ).join('');
+
+  // Question navigation dots
+  document.getElementById('nav').innerHTML = Q.map((_, i) =>
+    `<button class="qdot ${i===current?'current':''} ${answers[i]!==null?'done':''} ${review.has(i)?'review':''}" onclick="goTo(${i})" title="${i+1}">${i+1}</button>`
+  ).join('');
+
+  // Mark button status
+  const mb = document.getElementById('markBtn');
+  const ms = document.getElementById('markStatus');
+  if (review.has(current)) {
+    mb.textContent = '✓ चिह्नित — बाद में देखें';
+    mb.className = 'btn btn-ghost';
+    ms.textContent = 'यह प्रश्न रिव्यू लिस्ट में है';
+  } else {
+    mb.textContent = '⚑ बाद में देखें (Mark for Review)';
+    ms.textContent = '';
+  }
+
+  // Review indicator
+  const ri = document.getElementById('reviewIndicator');
+  const rc = reviewCount();
+  ri.style.display = rc > 0 ? 'block' : 'none';
+  ri.textContent = `⚑ ${rc} प्रश्न बाद में देखने के लिए चिह्नित`;
+}
+
+function reviewCount() {
+  return review.size;
+}
+
+function choose(i) {
+  answers[current] = i;
+  render();
+}
+
+function move(d) {
+  current = Math.max(0, Math.min(Q.length-1, current+d));
+  render();
+}
+
+function goTo(i) {
+  current = i;
+  render();
+}
+
+function markReview() {
+  if (review.has(current)) {
+    review.delete(current);
+  } else {
+    review.add(current);
+  }
+  render();
+}
+
+function confirmSubmit() {
+  const done = answers.filter(x => x !== null).length;
+  if (done === 0) {
+    if (!confirm('आपने कोई प्रश्न हल नहीं किया। टेस्ट जमा करना चाहते हो?')) return;
+  } else if (done < Q.length) {
+    if (!confirm(`आपने ${done}/${Q.length} प्रश्न हल किए हैं। बाकी प्रश्नों के उत्तर दिए बिना टेस्ट जमा करें?`)) return;
+  }
+  submit(false);
+}
+
+function confirmAbort() {
+  if (confirm('टेस्ट छोड़ें? आपका कोई परिणाम सुरक्षित नहीं रहेगा।')) {
+    clearInterval(tick);
+    document.getElementById('exam').hidden = true;
+    document.getElementById('start').hidden = false;
+    secs = mode === 10 ? 300 : mode === 20 ? 600 : 1500;
+  }
+}
+
+function submit(timedOutFlag) {
+  clearInterval(tick);
+  document.getElementById('exam').hidden = true;
+  document.getElementById('result').hidden = false;
+
+  const correct = Q.filter((x, i) => answers[i] === x.a).length;
+  const pct = Math.round(correct / Q.length * 100);
+  const used = Math.round((Date.now() - started) / 1000);
+
+  // Save best score
+  const key = 'bestScore-number-system';
+  const prev = Number(localStorage.getItem(key) || 0);
+  if (pct > prev) localStorage.setItem(key, pct);
+
+  // Show result
+  const resultDiv = document.getElementById('result');
+  const grade = pct >= 80 ? 'अत्यंत श्रेष्ठ' : pct >= 60 ? 'अच्छा' : pct >= 40 ? 'साधारण' : 'सलाह: और अभ्यास करें';
+  const gradeColor = pct >= 80 ? 'var(--success)' : pct >= 60 ? 'var(--accent)' : 'var(--danger)';
+
+  resultDiv.innerHTML = `
+    <div class="card" style="text-align:center">
+      <div class="result-ring" style="--score:${pct}%">
+        <div>
+          <b style="font-size:2rem">${pct}%</b>
+          <small>${correct}/${Q.length} सही</small>
+        </div>
+      </div>
+      <h2 style="color:${gradeColor};margin:16px 0 8px">${grade}</h2>
+      <p style="color:var(--muted);font-size:.9rem;margin:0 0 20px">${timedOutFlag ? '⏱ समय समाप्त होने पर स्वचालित जमा' : 'मैन्युअल जमा'}</p>
+      <div class="stats" style="justify-content:center">
+        <div class="stat"><b>${correct}</b><small>सही</small></div>
+        <div class="stat"><b>${Q.length-correct}</b><small>गलत / अनुत्तरित</small></div>
+        <div class="stat"><b>${Math.floor(used/60)}:${String(used%60).padStart(2,'0')}</b><small>समय लिया</small></div>
+        <div class="stat"><b>${pct}%</b><small>सटीकता</small></div>
+        <div class="stat"><b>${Math.round(used/Q.length*10)/10}s</b><small>प्रति प्रश्न</small></div>
+      </div>
+    </div>
+
+    <h2 style="margin:30px 0 16px">प्रश्नवार विश्लेषण</h2>
+    ${Q.map((x, i) => {
+      const isCorrect = answers[i] === x.a;
+      const isUnanswered = answers[i] === null;
+      const yourAns = isUnanswered ? '— (अनुत्तरित)' : x.o[answers[i]];
+      const isReviewed = review.has(i);
+      return `<div class="card" style="margin:8px 0;${isReviewed?'border-left:4px solid var(--accent);':''}">
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:10px;flex-wrap:wrap">
+          <b style="font-size:1rem">${i+1}. ${x.q}</b>
+          <span class="badge ${isCorrect?'success':''}" style="font-size:.7rem">${isCorrect?'✓ सही':'✗ गलत'}${isUnanswered?' (अनुत्तरित)':''}</span>
+        </div>
+        <p style="margin:8px 0 4px;color:var(--muted);font-size:.9rem"><b>तुम्हारा उत्तर:</b> ${yourAns}</p>
+        <p style="margin:4px 0 4px"><b>सही उत्तर:</b> ${x.o[x.a]}</p>
+        <p style="margin:4px 0 0;color:var(--muted);font-size:.88rem">${x.e}</p>
+        <small style="color:var(--muted);font-size:.75rem">स्तर: ${x.d}</small>
+      </div>`;
+    }).join('')}
+
+    <div class="lesson-actions" style="margin-top:24px">
+      <button class="btn btn-primary" onclick="startTest()">🔄 फिर से दें (नया सेट)</button>
+      <a class="btn btn-secondary" href="class-9-math-chapter-1-questions.html">📝 सभी 50 प्रश्न और हल देखें</a>
+      <a class="btn btn-secondary" href="class-9-math-chapter-1-notes.html">📖 सिद्धांत दोहराएँ</a>
+      <a class="btn btn-secondary" href="dashboard.html">📊 मेरा डैशबोर्ड</a>
+    </div>
+  `;
+  resultDiv.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* Keyboard navigation */
+document.addEventListener('keydown', e => {
+  if (document.getElementById('exam').hasAttribute('hidden')) return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); move(1); }
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); move(-1); }
+  else if (e.key === 'm' || e.key === 'M') { e.preventDefault(); markReview(); }
+  else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); confirmSubmit(); }
+  else if (e.key >= '1' && e.key <= '4') {
+    const i = parseInt(e.key) - 1;
+    if (i < Q[current].o.length) choose(i);
+  }
+});
+
+/* Year */
+document.querySelectorAll('.year').forEach(x => x.textContent = new Date().getFullYear());
 </script></body></html>

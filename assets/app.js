@@ -4,7 +4,8 @@ const CONTENT=[
  {title:'गति और बल',type:'नोट्स',meta:'कक्षा 9 • विज्ञान',url:'search.html?q=बल',keys:'force motion speed physics गति बल'},
  {title:'प्रकाश — परावर्तन',type:'अध्याय',meta:'कक्षा 10 • विज्ञान',url:'search.html?q=प्रकाश',keys:'light reflection science'},
  {title:'प्रतिशत कैलकुलेटर',type:'टूल',meta:'गणित लैब',url:'math-lab.html#calculator',keys:'percentage calculator प्रतिशत'},
- {title:'संख्या पद्धति क्विज़',type:'टेस्ट',meta:'10 प्रश्न • 10 अंक',url:'test.html',keys:'mcq mock number system test'},
+ {title:'संख्या पद्धति क्विज़',type:'टेस्ट',meta:'10/20/50 प्रश्न • समयबद्ध',url:'test.html',keys:'mcq mock number system test timed online'},
+ {title:'50 प्रश्न अभ्यास — संख्या पद्धति',type:'अभ्यास',meta:'कक्षा 9 • गणित • Easy/Moderate/Hard',url:'class-9-math-chapter-1-questions.html',keys:'50 questions practice number system hard moderate easy solutions'},
  {title:'BPSC सामान्य अध्ययन',type:'परीक्षा',meta:'प्रतियोगी परीक्षा',url:'search.html?q=BPSC',keys:'bihar competitive general studies'},
  {title:'SSC गणित अभ्यास',type:'टेस्ट',meta:'प्रतियोगी परीक्षा',url:'test.html',keys:'ssc quantitative aptitude'}
 ];
